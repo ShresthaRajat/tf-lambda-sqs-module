@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                ${join(",", formatlist("\"%s\"", sqs_queues))},
+                ${join(",", formatlist("\"%s\"", cw_logs_group))}
+
+            ]
+            
+        }
+    ]
+}
